@@ -39,63 +39,63 @@ From what I've gathered timing doesn't have to be ultra precise, so in most case
 
 #2. Microservices
 
-  *Syringes
+* Syringes
 
-    *Push a solution into the mason jar, or retract to load a new syringe. Automatically stops the motor upon receiving input from the microswitches that the plunger is fully depressed or retracted.
+  * Push a solution into the mason jar, or retract to load a new syringe. Automatically stops the motor upon receiving input from the microswitches that the plunger is fully depressed or retracted.
 
-    *Methods
+  * Methods
 
-      *Depress (Parameters: syringe #, speed(if supported by HW))
-      *Retract (Parameters: syringe #, speed(if supported by HW))
-      *Get current state (Parameter: one or more syringe #s)
+    * Depress (Parameters: syringe #, speed(if supported by HW))
+    * Retract (Parameters: syringe #, speed(if supported by HW))
+    * Get current state (Parameter: one or more syringe #s)
 
-    *Hardware Interfaces
+  * Hardware Interfaces
 
-      *Forward
-      *Reverse
-      *Forward stop switch
-      *Reverse stop switch 
+    * Forward
+    * Reverse
+    * Forward stop switch
+    * Reverse stop switch 
 
-  *Temperature
+* Temperature
 
-    *PID controller to maintain a specific temperature in the mason jar. Need to test if the performance of the Pi will perform PID decently on solutions with the specific heat we're dealing with. Looks like some people on the internet have had success with water based stuff but Ugl1tomato raised a good point about the Pi and timing. A little research shows the Pi has difficulty with single digit millisecond timing but I'm thinking we don't need to deal with timing at such a fine resolution. Also maintains a file containing the individual PID settings so they can be tweaked.
+  * PID controller to maintain a specific temperature in the mason jar. Need to test if the performance of the Pi will perform PID decently on solutions with the specific heat we're dealing with. Looks like some people on the internet have had success with water based stuff but Ugl1tomato raised a good point about the Pi and timing. A little research shows the Pi has difficulty with single digit millisecond timing but I'm thinking we don't need to deal with timing at such a fine resolution. Also maintains a file containing the individual PID settings so they can be tweaked.
 
-    *Methods
+  * Methods
 
-      *Heat (Parameter: temperature)
-      *Off
-      *Get current temperature
-      *Set PID settings
-      *Get PID settings
+    * Heat (Parameter: temperature)
+    * Off
+    * Get current temperature
+    * Set PID settings
+    * Get PID settings
 
-    *Hardware Interfaces
+  * Hardware Interfaces
 
-      *Heater
-      *Thermistor
+    * Heater
+    * Thermistor
 
-  *Stirrer
+* Stirrer
 
-    *Controls the stirring tool
+  * Controls the stirring tool
 
-    *Methods
+  * Methods
 
-      *On (Parameter: speed(if supported by HW or potentially PWM))
-      *Off
-      *Get current state
+    * On (Parameter: speed(if supported by HW or potentially PWM))
+    * Off
+    * Get current state
 
-  *Files
+* Files
 
-    *RESTful, provides access to your saved 4TVC files, ability to import new ones
+  * RESTful, provides access to your saved 4TVC files, ability to import new ones
 
-    *Methods (do most of these in a RESTful way but listing them as generalizations)
+  * Methods (do most of these in a RESTful way but listing them as generalizations)
 
-      *List
-      *Import (POST)
-      *Delete
-      *Load (GET)
-      *Update
-      *Search SD card
-      *Import from SD card (Parameter: filename)
+    * List
+    * Import (POST)
+    * Delete
+    * Load (GET)
+    * Update
+    * Search SD card
+    * Import from SD card (Parameter: filename)
 
 
 
@@ -126,28 +126,28 @@ Probably should keep in an open format such as XML, could even be a JSON file.
 
 Metadata (many fields could be optional)
 
-  *Common Name ("Aspirin")
-  *Technical Name ("Acetylsalicylic Acid")
-  *Abbreviation ("ACA")
-  *Version of 4TVC File ("1.0")
-  *Date of 4TVC File ("2016-01-01")
-  *Photo to be displayed on the UI along with the name (Base64 or Base16 encoded)
-  *.mol data so a UI could potentially render the molecule (Maybe just ASCII or Base64 encoded)
-  *Description
-    *en-US	Description of the pharma, pre-plan and tag all text to be displayed to user with an IETF language code so additional languages can be added to file later
-  *Formula - diagram of all the reactions
-  *Array of names of chemicals / solvents needed along with amounts
-  *Amount of result expected to produce
-  *Source / Credit ("Chematica")
+  * Common Name ("Aspirin")
+  * Technical Name ("Acetylsalicylic Acid")
+  * Abbreviation ("ACA")
+  * Version of 4TVC File ("1.0")
+  * Date of 4TVC File ("2016-01-01")
+  * Photo to be displayed on the UI along with the name (Base64 or Base16 encoded)
+  * .mol data so a UI could potentially render the molecule (Maybe just ASCII or Base64 encoded)
+  * Description
+    * en-US	Description of the pharma, pre-plan and tag all text to be displayed to user with an IETF language code so additional languages can be added to file later
+  * Formula - diagram of all the reactions
+  * Array of names of chemicals / solvents needed along with amounts
+  * Amount of result expected to produce
+  * Source / Credit ("Chematica")
 
 Procedure
 
-  *Array of steps - each step may contain 
+  * Array of steps - each step may contain 
 
-    *Instructions to be displayed to the user before proceding along with an optional picture (all text tagged with IETF language code)
-    *A set of hardware instructions	(Instructions would represent things like "Depress syringe 1", "Set heater to 40 C", "Wait until reaches 40 C for 2 minutes", "Depress syringe 2", "Turn off heater", "Wait until temperature reaches 28C") Need ways to represent "do this THEN do this" vs "do this WHILE doing this." Each instruction could optionally have a little text to tell the user what is happening.
-    *Expected length of time to completion so UI can display a countdown timer
-    *Instructions to be displayed to the user after the step completes, along with an optional picture (text tagged with IETF language code)
+    * Instructions to be displayed to the user before proceding along with an optional picture (all text tagged with IETF language code)
+    * A set of hardware instructions	(Instructions would represent things like "Depress syringe 1", "Set heater to 40 C", "Wait until reaches 40 C for 2 minutes", "Depress syringe 2", "Turn off heater", "Wait until temperature reaches 28C") Need ways to represent "do this THEN do this" vs "do this WHILE doing this." Each instruction could optionally have a little text to tell the user what is happening.
+    * Expected length of time to completion so UI can display a countdown timer
+    * Instructions to be displayed to the user after the step completes, along with an optional picture (text tagged with IETF language code)
 
 
 
