@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Apothecary Microlab Diagnostic Tools</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-left"><img style="max-height:48px; margin-right: 30px;" src="images/6069413.jpg"></a>
+            <a class="navbar-brand" href="#">Apothecary Microlab</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Home</a></li>
+              <li class="active"><a href="#about">Diagnostic Tools</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+
+
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Syringe 1
+            </h3>
+          </div>
+          <div class="panel-body">
+            <p>
+	    <div class="row">
+	        <div class="col-xs-6">
+		  Current Status: 
+                </div>
+		<div class="col-xs-6">
+		  <div id="syringe1state">Loading...</div>
+		</div>
+            </div>
+            </p>
+            <p>
+		    <button type="button" class="btn btn-success" onclick="sendSyringeState(1, 'depressing');">Depress</button>
+		    <button type="button" class="btn btn-success" onclick="sendSyringeState(1, 'retracting');">Retract</button>
+		    <button type="button" class="btn btn-danger" onclick="sendSyringeState(1, 'idle');">Stop</button>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Syringe 2
+            </h3>
+          </div>
+          <div class="panel-body">
+            <p>
+	    <div class="row">
+	        <div class="col-xs-6">
+		  Current Status: 
+                </div>
+		<div class="col-xs-6">
+		  <div id="syringe2state">Loading...</div>
+		</div>
+            </div>
+            </p>
+            <p>
+		    <button type="button" class="btn btn-success" onclick="sendSyringeState(2, 'depressing');">Depress</button>
+		    <button type="button" class="btn btn-success" onclick="sendSyringeState(2, 'retracting');">Retract</button>
+		    <button type="button" class="btn btn-danger" onclick="sendSyringeState(2, 'idle');">Stop</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Stirrer
+            </h3>
+          </div>
+          <div class="panel-body">
+            <p>
+	    <div class="row">
+	        <div class="col-xs-6">
+		  Current Status: 
+                </div>
+		<div class="col-xs-6">
+		  <div id="stirrerstate">Loading...</div>
+		</div>
+            </div>
+            </p>
+            <p>
+		    <button type="button" class="btn btn-success" onclick="sendStirrerState('on');">On</button>
+		    <button type="button" class="btn btn-danger" onclick="sendStirrerState('off');">Off</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Heater
+            </h3>
+          </div>
+          <div class="panel-body">
+	    <p>
+		<button type="button" class="btn btn-success" onclick="sendHeaterState('enabled');">Enable</button>
+		<button type="button" class="btn btn-danger" onclick="sendHeaterState('disabled');">Disable</button>
+	    </p>
+            <p>
+		<div class="row">
+			<div class="col-xs-6">
+		Current State:
+			</div>
+			<div class="col-xs-6">
+				<div id="heaterstate">Loading...</div>
+			</div> 
+		</div>
+	    </p>
+            <p>
+		<div class="row">
+			<div class="col-xs-6">
+		Current Status:
+			</div>
+			<div class="col-xs-6">
+				<div id="heateroperation">Loading...</div>
+			</div> 
+		</div>
+	    </p>
+            <p>
+		<div class="row">
+			<div class="col-xs-6">
+		Set Temp:
+			</div>
+			<div class="col-xs-6">
+				<div id="heatersettemp">Loading...</div>
+			</div> 
+		</div>
+	    </p>
+            <p>
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Set temp..." id="setTempInput">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type=button" onclick="sendHeaterSetTemp();">Set</button>
+			</span>
+		</div>
+	    </p>
+	    <p>
+		<div class="row">
+			<div class="col-xs-6">
+		Current Temp:
+			</div>
+			<div class="col-xs-6">
+				<div id="heatercurrenttemp"><kbd>Loading...</kbd></div>
+			</div> 
+		</div>
+	    </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+jQuery.each( [ "put", "delete" ], function( i, method ) {
+  jQuery[ method ] = function( url, data, callback, type ) {
+    if ( jQuery.isFunction( data ) ) {
+      type = type || callback;
+      callback = data;
+      data = undefined;
+    }
+
+    return jQuery.ajax({
+      url: url,
+      type: method,
+      dataType: type,
+      data: data,
+      success: callback
+    });
+  };
+});
+
+$(document).ready(function() {
+  pollSyringeState();
+  pollStirrerState();
+  pollHeaterState();
+});
+
+function pollSyringeState(){
+  $.ajax({
+    url: "/syringes/syringes"
+  }).then(function(data) {
+    $('#syringe1state').text(data.syringes[0].currentstate);
+    $('#syringe2state').text(data.syringes[1].currentstate);
+    setTimeout(pollSyringeState, 2000);
+  });  
+}
+
+function pollStirrerState(){
+  $.ajax({
+    url: "/stirrers/stirrers"
+  }).then(function(data) {
+    $('#stirrerstate').text(data.stirrers[0].currentstate);
+    setTimeout(pollStirrerState, 2000);
+  });  
+}
+
+function pollHeaterState(){
+  $.ajax({
+    url: "/heaters/heaters"
+  }).then(function(data) {
+    $('#heaterstate').text(data.heaters[0].currentstate);
+    $('#heateroperation').text(data.heaters[0].currentoperation);
+    $('#heatersettemp').text(data.heaters[0].settemp);
+    $('#heatercurrenttemp').html("<kbd>" + data.heaters[0].currenttemp + "° C</kbd>");
+    setTimeout(pollHeaterState, 2000);
+  });  
+}
+
+function sendSyringeState(index, state){
+  $.ajax({
+    url: "/syringes/syringes/" + index, 
+    type: "PUT",
+    contentType: "application/json",
+    data: JSON.stringify({currentstate:state}), 
+    success: function(result){
+      $('#syringe' + index + 'state').text(result.syringe.currentstate);
+    }})
+}
+
+function sendStirrerState(state){
+  $.ajax({
+    url: "/stirrers/stirrers/1", 
+    type: "PUT",
+    contentType: "application/json",
+    data: JSON.stringify({currentstate:state}), 
+    success: function(result){
+      $('#stirrerstate').text(result.stirrer.currentstate);
+    }})
+}
+
+function sendHeaterState(state){
+  $.ajax({
+    url: "/heaters/heaters/1", 
+    type: "PUT",
+    contentType: "application/json",
+    data: JSON.stringify({currentstate:state}), 
+    success: function(result){
+      $('#heaterstate').text(result.heater.currentstate);
+    }})
+}
+
+function sendHeaterSetTemp(){
+  $.ajax({
+    url: "/heaters/heaters/1", 
+    type: "PUT",
+    contentType: "application/json",
+    data: JSON.stringify({settemp:parseInt($('#setTempInput').val())}), 
+    success: function(result){
+      $('#heatersettemp').text(result.heater.settemp);
+    }})
+}
+    </script>
+
+  </body>
+</html>
