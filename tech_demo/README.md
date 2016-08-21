@@ -84,10 +84,10 @@ fivetwentysix suggested having some stubs for the services so he can play with t
 
 * Edit ```4tvc/tech_demo/services_stubs/nginx.conf``` to have the directory where your wwwroot is located (the one within ```4tvc/tech_demo/services_stubs```
 * Open four terminal windows and run one of the following in each:
-** ```4tvc/tech_demo/services_stubs/syringe_service.py```
-** ```4tvc/tech_demo/services_stubs/stirrer_service.py```
-** ```4tvc/tech_demo/services_stubs/heater_service.py```
-** ```nginx -c 4tvc/tech_demo/services_stubs/nginx.conf```
+  * ```4tvc/tech_demo/services_stubs/syringe_service.py```
+  * ```4tvc/tech_demo/services_stubs/stirrer_service.py```
+  * ```4tvc/tech_demo/services_stubs/heater_service.py```
+  * ```nginx -c 4tvc/tech_demo/services_stubs/nginx.conf```
 
 * Open a browser to ```http://localhost:7001``` and you should be able to play with the services
 
