@@ -36,7 +36,7 @@ w1-therm
 * ```sudo apt-get install python-dev nginx-full uwsgi uwsgi-plugin-python``` Installing python-dev before Flask allows some of Flask's dependencies to compile native code optimizations for the Raspberry Pi
 * ```sudo pip install flask gpiozero uwsgidecorators```
 
-### Run
+#### Run
 * ```cd ~```
 * ```git clone https://github.com/TheDukeZip/4tvc.git```
 * Open a terminal and ```cd /home/pi/4tvc/tech_demo/services``` then run ```./run_services.sh```
@@ -71,3 +71,24 @@ Connect one end of the switches to ground, and the other to GPIO Pins:
 There's a few spots to make the code more elegent, namely defining our own classes for the hardware. This code was quick and dirty - hoping to refactor a bit when I have some spare cycles.
 
 The deployment is kinda manual, real code will be much simpler!
+
+
+## Stubs
+
+fivetwentysix suggested having some stubs for the services so he can play with this on the desktop. He also suggested setting it up in a docker container. The stubs are available but docker container is not.
+
+* ```sudo apt-get install python-dev nginx-full```
+* ```sudo pip install flask flask-cors``` 
+
+* Pull latest code from github
+
+* Edit ```4tvc/tech_demo/services_stubs/nginx.conf``` to have the directory where your wwwroot is located (the one within ```4tvc/tech_demo/services_stubs```
+* Open four terminal windows and run one of the following in each:
+** ```4tvc/tech_demo/services_stubs/syringe_service.py```
+** ```4tvc/tech_demo/services_stubs/stirrer_service.py```
+** ```4tvc/tech_demo/services_stubs/heater_service.py```
+** ```nginx -c 4tvc/tech_demo/services_stubs/nginx.conf```
+
+* Open a browser to ```http://localhost:7001``` and you should be able to play with the services
+
+
