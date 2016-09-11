@@ -7,6 +7,15 @@ The software hosted here serves to:
  * Assist the hardware team test out various hardware components quickly
  * Provide a starting point for software development
 
+## Building and Running Docker
+
+```
+docker build --tag=4tvc
+docker run -P 4tvc
+```
+
+Run `docker ps` to find out what port 80 is serving to and visit it in your browser.
+
 ## Deployment Instructions
 
 #### Get Raspbian running
