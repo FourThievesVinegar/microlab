@@ -217,7 +217,7 @@ $(document).ready(function() {
 
 function pollSyringeState(){
   $.ajax({
-    url: "/syringes/syringes"
+    url: "/syringes"
   }).then(function(data) {
     $('#syringe1state').text(data.syringes[0].currentstate);
     $('#syringe2state').text(data.syringes[1].currentstate);
@@ -227,7 +227,7 @@ function pollSyringeState(){
 
 function pollStirrerState(){
   $.ajax({
-    url: "/stirrers/stirrers"
+    url: "/stirrers"
   }).then(function(data) {
     $('#stirrerstate').text(data.stirrers[0].currentstate);
     setTimeout(pollStirrerState, 2000);
@@ -236,7 +236,7 @@ function pollStirrerState(){
 
 function pollHeaterState(){
   $.ajax({
-    url: "/heaters/heaters"
+    url: "/heaters"
   }).then(function(data) {
     $('#heaterstate').text(data.heaters[0].currentstate);
     $('#heateroperation').text(data.heaters[0].currentoperation);
@@ -248,7 +248,7 @@ function pollHeaterState(){
 
 function sendSyringeState(index, state){
   $.ajax({
-    url: "/syringes/syringes/" + index, 
+    url: "/syringes/" + index, 
     type: "PUT",
     contentType: "application/json",
     data: JSON.stringify({currentstate:state}), 
@@ -259,7 +259,7 @@ function sendSyringeState(index, state){
 
 function sendStirrerState(state){
   $.ajax({
-    url: "/stirrers/stirrers/1", 
+    url: "/stirrers/1", 
     type: "PUT",
     contentType: "application/json",
     data: JSON.stringify({currentstate:state}), 
@@ -270,7 +270,7 @@ function sendStirrerState(state){
 
 function sendHeaterState(state){
   $.ajax({
-    url: "/heaters/heaters/1", 
+    url: "/heaters/1", 
     type: "PUT",
     contentType: "application/json",
     data: JSON.stringify({currentstate:state}), 
@@ -281,7 +281,7 @@ function sendHeaterState(state){
 
 function sendHeaterSetTemp(){
   $.ajax({
-    url: "/heaters/heaters/1", 
+    url: "/heaters/1", 
     type: "PUT",
     contentType: "application/json",
     data: JSON.stringify({settemp:parseInt($('#setTempInput').val())}), 
