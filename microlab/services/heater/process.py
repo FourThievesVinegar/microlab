@@ -2,7 +2,9 @@ from time import sleep
 
 from uwsgidecorators import postfork, thread
 
-from .control import read_temp, set_heater_operation
+from microlab.services.heater..control import (
+    read_temp, set_heater_operation
+)
 
 
 # TODO: extract this out to a persistent service

@@ -9,6 +9,18 @@ This is beta software and is under active development.
 
 For more information about the project, visit our website: https://fourthievesvinegar.org/
 
+## Running the Software
+
+It is advised you're using a virtualenv. Then install all the deps in `requirements.txt`:
+
+    pip install -r requirements.txt
+
+From the microlab root directory, just run the following command to run the Flask microservice layer.
+
+    FLASK_DEBUG=true ./run.py
+
+The API will be running at `localhost:5000`.
+
 ## Software Architecture
 
 ![Micro Lab Software Architecture](https://github.com/FourThievesVinegar/microlab/blob/master/images/SWArch.png)

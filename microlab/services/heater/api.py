@@ -1,14 +1,13 @@
-#!/usr/bin/env python
 import glob
 import time
 import threading
 
-from app import app
-from flask import Flask, jsonify, abort, make_response, request
-from gpiozero import OutputDevice
+from flask import jsonify, abort, make_response, request
+# from gpiozero import OutputDevice
 
-from .control import read_temp, set_heater_state
-from .settings import (
+from microlab import app
+from microlab.services.heater.control import read_temp, set_heater_state
+from microlab.services.heater.settings import (
     HEATER_GPIO_PIN, HEATERS, VALID_STATES, BASE_DIR,
     DEVICE_FOLDER, DEVICE_FILE, DEBUG,
 )

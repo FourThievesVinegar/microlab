@@ -1,10 +1,13 @@
 from .settings import (
     HEATER_GPIO_PIN, HEATERS, VALID_STATES, BASE_DIR,
-    DEVICE_FOLDER, DEVICE_FILE,
+    DEVICE_FOLDER, DEVICE_FILE, DEBUG,
 )
 
-heater_dev = OutputDevice(HEATER_GPIO_PIN)
-heater_dev.off()
+
+heater_dev = None
+if not DEBUG:
+    heater_dev = OutputDevice(HEATER_GPIO_PIN)
+    heater_dev.off()
 
 
 def read_temp_raw():
@@ -12,6 +15,7 @@ def read_temp_raw():
     lines = f.readlines()
     f.close()
     return lines
+
 
 # need to make this read a specific heater
 def read_temp():
@@ -27,6 +31,8 @@ def read_temp():
 
 
 def set_heater_operation(heater, operation):
+    if DEBUG:
+        return
     if operation == "off":
         heater_dev.off()
         heater["currentoperation"] = "idle"
@@ -34,7 +40,7 @@ def set_heater_operation(heater, operation):
         heater_dev.on()
         heater["currentoperation"] = "heating"
     else:
-        raise NotImplementedError("Bad heater operation: %s"  operation)
+        raise NotImplementedError("Bad heater operation: %s" % operation)
 
 
 def set_heater_state(heater, state):

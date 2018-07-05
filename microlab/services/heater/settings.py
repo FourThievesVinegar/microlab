@@ -1,5 +1,7 @@
 import glob
 
+
+# TODO: change this to flask debug
 DEBUG=True
 
 # Put into a global settings file or auto-discover/wizard
@@ -21,8 +23,12 @@ VALID_STATES = {
     'enabled',
 }
 
+BASE_DIR = None
+DEVICE_FOLDER = None
+DEVICE_FILE = None
 # For 1-wire temp sensor interface
-BASE_DIR = '/sys/bus/w1/devices/'
-DEVICE_FOLDER = glob.glob(base_dir + '28*')[0]
-DEVICE_FILE = device_folder + '/w1_slave'
+if not DEBUG:
+    BASE_DIR = '/sys/bus/w1/devices/'
+    DEVICE_FOLDER = glob.glob(BASE_DIR + '28*')[0]
+    DEVICE_FILE = DEVICE_FOLDER + '/w1_slave'
 
