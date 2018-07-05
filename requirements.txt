@@ -7,3 +7,4 @@ MarkupSafe==1.0
 pkg-resources==0.0.0
 Werkzeug==0.14.1
 flask-cors==3.0.6
+uwsgidecorators-1.1.0

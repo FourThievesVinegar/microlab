@@ -1,5 +1,7 @@
 import glob
 
+DEBUG=True
+
 # Put into a global settings file or auto-discover/wizard
 HEATER_GPIO_PIN = 16
 
@@ -23,5 +25,4 @@ VALID_STATES = {
 BASE_DIR = '/sys/bus/w1/devices/'
 DEVICE_FOLDER = glob.glob(base_dir + '28*')[0]
 DEVICE_FILE = device_folder + '/w1_slave'
-
 

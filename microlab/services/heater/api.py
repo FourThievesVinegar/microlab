@@ -1,13 +1,17 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+import glob
+import time
+import threading
+
 from app import app
 from flask import Flask, jsonify, abort, make_response, request
-from .settings import HEATER_GPIO_PIN, HEATERS, VALID_STATES
+from gpiozero import OutputDevice
 
-
-def set_heater_state(state):
-    if state == "disabled":
-        set_heater_operation("off")
-    HEATERS[0]['currentstate'] = state
+from .control import read_temp, set_heater_state
+from .settings import (
+    HEATER_GPIO_PIN, HEATERS, VALID_STATES, BASE_DIR,
+    DEVICE_FOLDER, DEVICE_FILE, DEBUG,
+)
 
 
 # Retrieve list of all heaters and their properties
@@ -21,16 +25,19 @@ def get_heaters():
 def get_heater(heater_id):
     heater = HEATERS.get(heater_id)
     if not heater:
-        abort(404)
-    return jsonify({'heater': heater})
+        abort(404, "Invalid heater ID specified.")
+
+    return jsonify({'heater': heater[0]})
 
 
 # Allow client to set the state and set temp of the heater
 @app.route('/heaters/<int:heater_id>', methods=['PUT'])
 def update_heater(heater_id):
-    heater = HEATERS.get(heater_id)
+    if not request.json:
+        abort(400, "No JSON PUT body passed.")
 
-    if not heater or not request.json:
+    heater = HEATERS.get(heater_id)
+    if not heater:
         abort(404, "Invalid heater ID specified.")
 
     currentstate = request.json.get("currentstate")
@@ -45,8 +52,10 @@ def update_heater(heater_id):
     if type(settemp) != int:
         abort(400, "Invalid 'settemp' specified.")
 
-    heater["currentstate"] = currentstate
     heater["settemp"] = settemp
+    heater["currentstate"] = state
+    if not DEBUG:
+        set_heater_state(heater, currentstate)
 
     print("SET: Heater: %s, temp: %s, state: %s" % (
         heater_id, currentstate, settemp))
@@ -57,5 +66,5 @@ def update_heater(heater_id):
 # For 404, the client will expect a JSON formatted error code
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({"error": "Not found."}), 404)
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
