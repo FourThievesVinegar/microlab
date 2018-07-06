@@ -19,6 +19,7 @@ syringe1_rev_stop_switch.when_pressed = stop_syringe1
 syringe2_fwd_stop_switch.when_pressed = stop_syringe2
 syringe2_rev_stop_switch.when_pressed = stop_syringe2
 
+
 # Switch Initializations
 def stop_syringe1(direction):
     syringe1.stop()
