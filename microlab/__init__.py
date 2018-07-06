@@ -3,10 +3,6 @@ import time
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-#from microlab.services.heater import api, process
-#from microlab.time import get_time
-
-
 app = Flask(__name__)
 CORS(app)
 

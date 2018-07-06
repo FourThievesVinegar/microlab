@@ -6,6 +6,7 @@ from .settings import (
 
 heater_dev = None
 if not DEBUG:
+    from gpiozero import OutputDevice
     heater_dev = OutputDevice(HEATER_GPIO_PIN)
     heater_dev.off()
 
