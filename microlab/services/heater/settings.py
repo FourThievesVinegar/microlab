@@ -7,7 +7,6 @@ DEBUG=True
 # Put into a global settings file or auto-discover/wizard
 HEATER_GPIO_PIN = 16
 
-# TODO: discover some of this automatically
 HEATERS = {
     1: {
         'heater_gpiopin': HEATER_GPIO_PIN,

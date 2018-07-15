@@ -1,0 +1,20 @@
+meta:
+  name: Example Reaction
+  desc: >
+    This is an example 4TVC apocathary microlab file.
+    It contains all basic commands that would be needed.
+  version: 0.0.1
+
+steps:
+- start clock
+- set temp to 70C
+- wait until temp is 70
+- dump syringe 1
+- set clock to 00:00:00
+- start clock
+- wait until time is 00:05:00
+- shutdown
+
+background:
+- every 00:00:30: [if temp is 100C: shutdown]
+

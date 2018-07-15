@@ -1,3 +1,4 @@
 Flask==1.0.2
 gpiozero==1.4.1
 Celery-4.2.0
+pyyaml-3.13

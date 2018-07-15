@@ -15,7 +15,7 @@ app = Celery(
 )
 
 
-# TODO: we will need a shared database to do this properly
+# TODO: turn this into a celery beat worker
 @app.task
 def heater_update():
     while True:
