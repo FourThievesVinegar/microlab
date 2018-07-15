@@ -2,3 +2,5 @@
 *.swp
 *.swo
 *.deb
+microlab/settings.py
+rabbitmq_install.sh
