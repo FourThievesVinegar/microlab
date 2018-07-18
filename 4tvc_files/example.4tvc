@@ -5,16 +5,57 @@ meta:
     It contains all basic commands that would be needed.
   version: 0.0.1
 
-steps:
-- start clock
-- set temp to 70C
-- wait until temp is 70
-- dump syringe 1
-- set clock to 00:00:00
-- start clock
-- wait until time is 00:05:00
-- shutdown
+# This is the main control program for executing a reaction
+reaction_process: |
+  # Set the temperature to 70C
+  # All temperatures are in Celcius
+  set temp = 70
+  # Wait until the actual read temp is 70C, this
+  # can take a variable amount of time
+  wait_until(temp == 70)
+  # Turn on stirrer #1
+  start_stirrer(1)
+  # Dump contents of syringe #1
+  # This command blocks until syringe has been
+  # fully engaged (pressed all the way down)
+  dump_syringe(1)
+  # Set the clock to zero ...
+  set clock == 00:00:00
+  # ... and start counting ...
+  start_clock()
+  # ... and wait until five mins have elapsed
+  # This will check every 1 second
+  wait_until(clock >= 00:05:00, 00:00:01)
+  # Stop stirrer. Unnecessary since next instruction
+  # is a total system shutdown.
+  stop_stirrer(1)
+  # Power off all hardware, stop all background
+  # control processes, as well.
+  shutdown
 
-background:
-- every 00:00:30: [if temp is 100C: shutdown]
+# These are background processes that check microlab
+# variables and execute commands upon the criteria met
+background_processes:
+# This is the name of a process
+- Check for too hot:
+  # Run the following commands every 30s
+  every: 00:00:30
+  # These are the commands to run. This can
+  # use all instructions from above.
+  commands: |
+    # Check to see if the current temp is above 100C
+    if(temp > 100):
+      # Send a message to the UI, with ERROR status
+      send_message("Terminal temp exceeded. Shutting down!", ERROR)
+      # Shut down all hardware, background & control processes
+      shutdown
+- Check warning runtime:
+  # Run every minute
+  every: 00:01:00
+  commands: |
+    if (clock > 05:00:00):
+      send_message("Microlab exceeded max runtime, shutting down.", ERROR)
+      shutdown
+    elif (clock > 04:00:00):
+      send_message("Microlab running above recommended time.", WARN)
 
