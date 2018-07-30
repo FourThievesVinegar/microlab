@@ -40,3 +40,4 @@ The API will be running at `localhost:5000`.
 
 STL files for building the 3D-printed microlab equipment can be found here https://github.com/FourThievesVinegar/Parts
 
+Microlab PCB design files and outputs can be found here: https://github.com/FourThievesVinegar/microlab-pcb
