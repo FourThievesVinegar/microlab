@@ -48,3 +48,11 @@ def set_heater_state(heater, state):
     if state == "disabled":
         set_heater_operation("off")
 
+# This will get ran as a Celery command
+def heater_control(self):
+    while True:
+        # Take current temp reading
+        # Calculate gradient, gaussians, derivatives, etc, per control algorithm
+        # Control the heater element accordingly
+        # Sleep/loop, etc
+
