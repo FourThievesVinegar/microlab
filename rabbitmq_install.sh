@@ -5,10 +5,18 @@ VHOST=microlab
 TAG=microlab
 
 if [ -z "${PASS}" ]; then
-    echo -n "Set PASS in ./rabbitmq_install.py and set the same password"
+    echo -n "Set PASS in ./rabbitmq_install.sh and set the same password"
     echo " to AMPQ_PASS in microlab/settings.py"
     exit 1
 fi
+
+if [ -z "`which lsb_release`" ]; then
+    echo "This script only works for Ubuntu/Debian systems."
+    echo "To install rabbitMQ, please vitis their instructions"
+    echo "at https://www.rabbitmq.com/download.html"
+    exit 1
+fi
+
 
 if ! [ -z "`which lsb_release`" ]; then
     if ! [ -f rabbitmq-server_3.7.7-1_all.deb ] && ! [ -z "`which rabbitmq-server`" ]; then
