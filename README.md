@@ -1,5 +1,7 @@
 # FTVC Microlab
 
+## NOTE: This project is outdated. [The new version is here](https://github.com/FourThievesVinegar/solderless-microlab).
+
 ![Four Thieves Vinegar Micro Lab](https://github.com/FourThievesVinegar/microlab/blob/master/images/4tvc.jpg)
 
 
